@@ -122,7 +122,7 @@
             <select for="inputType" name="tipo" class="form-control">
                 <option value="0">Cliente</option>
                 <option value="1">Funcionário</option>
-            </select>
+            </select>    
         </div>
     </fieldset>
     <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
