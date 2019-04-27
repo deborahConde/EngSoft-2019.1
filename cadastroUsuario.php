@@ -53,7 +53,7 @@
             </div>
             <div class="form-group col-md-2">
             <label for="inputPassword4">Telefone</label>
-            <input type="text" name="telefone" class="form-control" id="inputTelefone4" placeholder="(11)1111-1111" onkeypress="mascara(this, '## ####-####')"  maxlength="12">
+            <input type="text" name="telefone" class="form-control" id="inputTelefone4" placeholder="(11)1111-1111" onkeypress="mascara(this, '(##) ####-####')"  maxlength="12">
             </div>
             <div class="form-group col-md-2">
             <label for="inputPassword4">CPF</label>
@@ -132,8 +132,10 @@
     /* Ligação com Banco de Dados */
     if(isset($_POST["submit"]))
     {
+        echo "<p>Test</p>";
         include_once("conexao.php");/* Estabelece a conexão */
 
+        echo "<p>Test</p>";
         $email = $_POST['email'];
         $senha = $_POST['senha'];
         $nome = $_POST['nome'];
