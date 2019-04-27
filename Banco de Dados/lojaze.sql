@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `senha` varchar(40) NOT NULL,
   `nome` varchar(40) CHARACTER SET latin1 NOT NULL,
   `telefone` varchar(12) NOT NULL,
@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `cidade` varchar(40) CHARACTER SET latin1 NOT NULL,
   `estado` varchar(40) CHARACTER SET latin1 NOT NULL,
   `cep` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `tipo` int(5) NOT NULL,
   PRIMARY KEY (`nome`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 COMMIT;
