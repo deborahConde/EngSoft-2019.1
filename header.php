@@ -18,15 +18,22 @@
       <li class="nav-item">
         <a class="nav-link" href="visualizarUsuario.php">Visualizar Usuário</a>
       </li>
-<<<<<<< HEAD
       <li class="nav-item">
         <a class="nav-link" href="exibirUsuario.php">Exibir Usuário</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="editarUsuario.php">Editar Usuário</a>
       </li>
-=======
->>>>>>> master
+      <!---TEST--->
+
+      <li class="nav-item">
+      
+        <a class="nav-link" href="login.php">Login</a>
+      
+      </li>
+  
+
+      <!--- --->
     </ul>
   </div>
   <!--Links do Menu-->

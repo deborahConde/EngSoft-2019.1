@@ -10,3 +10,4 @@ if (isset($_GET['cpf'])) {
 } else {
   http_response_code(500);
 }
+?>  

@@ -47,7 +47,12 @@
                         mysqli_close($conexao);
                     ?>
                 </tbody>
-
             </table>
 
         </div>
+
+        <?php 
+            include "footer.php";
+        ?>
+
+</html>        
