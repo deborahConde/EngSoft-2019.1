@@ -22,17 +22,24 @@
                 <thead class="thead-light">
                     <th>Nome</th>
                     <th>Email</th>
+                    <th>Cpf</th>
+                    <th>Telefone</th>
+                    <th>Endereço</th>
+                    <th>Complemento</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Cep</th>
                     <th>Tipo</th>
                 </thead>
                 <tbody>
                     <?php
                         include_once("conexao.php");/* Estabelece a conexão */
-                        $sql = "SELECT * FROM usuarios ORDER BY Nome ASC";
+                        $sql = "SELECT * FROM usuarios";
                         $resultado = mysqli_query($conexao, $sql);
                         if (mysqli_num_rows($resultado) > 0) {
                             /* Dados de saída de cada linha */
                             while($linha = mysqli_fetch_assoc($resultado)) {
-                                echo "<tr><td>" . $linha["nome"].  "</td><td>" . $linha["email"] . "</td><td>" . $linha["tipo"] . "</td></tr>";
+                                echo "<tr><td>" . $linha["nome"].  "</td><td>" . $linha["email"] . "</td><td>" . $linha["cpf"] . "</td><td>" . $linha["telefone"] . "</td><td>". $linha["endereco"] . "</td><td>" . $linha["complemento"] . "</td><td>" . $linha["cidade"] . "</td><td>" . $linha["estado"] . "</td><td>" . $linha["cep"] . "</td><td>" . $linha["tipo"] . "</td></tr>";
                             }
                         } else {
                             echo "0 results";
