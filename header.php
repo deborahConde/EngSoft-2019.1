@@ -16,14 +16,14 @@
         <a class="nav-link" href="cadastroUsuario.php">Cadastro de Usuário</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizarUsuario.php">Visualizar  Usuário</a>
+        <a class="nav-link" href="visualizarUsuario.php">Visualizar Usuário</a>
       </li>
 <<<<<<< HEAD
       <li class="nav-item">
-        <a class="nav-link" href="exibirUsuario.php">Exibir  Usuário</a>
+        <a class="nav-link" href="exibirUsuario.php">Exibir Usuário</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="editarUsuario.php">Editar  Usuário</a>
+        <a class="nav-link" href="editarUsuario.php">Editar Usuário</a>
       </li>
 =======
 >>>>>>> master
