@@ -27,10 +27,12 @@ include "header.php";
         function mascara(t, mask) {
             var i = t.value.length;
             var saida = mask.substring(1, 0);
-            var texto = mask.substring(i)
-            //if (texto.substring(0, 1) != saida) {
-              //   t.value += texto.substring(0, 1);
-            //}
+            var texto = mask.substring(i);
+            console.log(i, texto, texto.substring(0, 1), saida);
+            if (texto.substring(0, 1) != saida) {
+                console.log(texto.substring(0, 1));
+                t.value += texto.substring(0, 1);
+            }
         }
     </script>
     <!-- Fim do script -->
@@ -120,7 +122,7 @@ include "header.php";
         <fieldset>
             <legend>Administrativo:</legend>
             <div>
-                <label for="inputType">Tipo de Usuiário</label>
+                <label for="inputType">Tipo de Usuário</label>
 
                 <?php
                 //$_SESSION['usuarioNiveisAcessoId'] = 1;// Quando for o priemiro acesso na pagina
@@ -135,7 +137,7 @@ include "header.php";
                     "<option value='1'>Cliente</option>"."</select>";
                 }
                 ?>
-                
+
             </div>
         </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>

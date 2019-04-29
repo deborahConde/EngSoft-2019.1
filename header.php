@@ -21,17 +21,14 @@
       <li class="nav-item">
         <a class="nav-link" href="exibirUsuario.php">Exibir Usuário</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="editarUsuario.php">Editar Usuário</a>
-      </li>
       <!---TEST--->
 
       <li class="nav-item">
-      
+
         <a class="nav-link" href="login.php">Login</a>
-      
+
       </li>
-  
+
 
       <!--- --->
     </ul>
