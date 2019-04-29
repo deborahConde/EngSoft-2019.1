@@ -44,7 +44,6 @@ include "header.php";
 ?>
 
 <body>
-
     <!-- Script para fazer a máscara. Com ele, você pode definir qualquer tipo de máscara com o comando onkeypress="mascara(this, '###.###.###-##')". -->
     <script language="JavaScript">
         function mascara(t, mask) {
@@ -65,21 +64,21 @@ include "header.php";
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="name" name="email" class="form-control" id="inputEmail4" placeholder="Email" value=<?php echo htmlspecialchars($linha['email']) ?>>
+                    <input type="name" name="email" class="form-control" id="inputEmail4" placeholder="Email" value="<?php echo htmlspecialchars($linha['email']) ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="inputEmail4">Nome</label>
-                    <input type="name" name="nome" class="form-control" id="inputNome4" placeholder="Nome" value=<?php echo htmlspecialchars($linha['nome']) ?>>
+                    <input type="name" name="nome" class="form-control" id="inputNome4" placeholder="Nome" value="<?php echo htmlspecialchars($linha['nome']) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputPassword4">Telefone</label>
-                    <input type="text" name="telefone" class="form-control" id="inputTelefone4" placeholder="(11)1111-1111" onkeypress="mascara(this, '(##)####-####')" maxlength="12" value=<?php echo htmlspecialchars($linha['telefone']) ?>>
+                    <input type="text" name="telefone" class="form-control" id="inputTelefone4" placeholder="(11)1111-1111" onkeypress="mascara(this, '(##)####-####')" maxlength="12" value="<?php echo htmlspecialchars($linha['telefone']) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputPassword4">CPF</label>
-                    <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14" value=<?php echo htmlspecialchars($linha['cpf']) ?>>
+                    <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14" value="<?php echo htmlspecialchars($linha['cpf']) ?>">
                 </div>
             </div>
         </fieldset>
@@ -87,20 +86,20 @@ include "header.php";
             <legend>Informações Residenciais:</legend>
             <div class="form-group">
                 <label for="inputAddress">Endereço</label>
-                <input type="text" name="endereco" class="form-control" id="inputAddress" placeholder="Av. Rio Branco" value=<?php echo htmlspecialchars($linha['endereco']) ?>>
+                <input type="text" name="endereco" class="form-control" id="inputAddress" placeholder="Av. Rio Branco" value="<?php echo htmlspecialchars($linha['endereco']) ?>">
             </div>
             <div class="form-group">
                 <label for="inputAddress2">Complemento</label>
-                <input type="text" name="complemento" class="form-control" id="inputAddress2" placeholder="Apartmento, estudio, or andar" value=<?php echo htmlspecialchars($linha['complemento']) ?>>
+                <input type="text" name="complemento" class="form-control" id="inputAddress2" placeholder="Apartmento, estudio, or andar" value="<?php echo htmlspecialchars($linha['complemento']) ?>">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Cidade</label>
-                    <input type="text" name="cidade" class="form-control" id="inputCity" placeholder="Cidade" value=<?php echo htmlspecialchars($linha['cidade']) ?>>
+                    <input type="text" name="cidade" class="form-control" id="inputCity" placeholder="Cidade" value="<?php echo htmlspecialchars($linha['cidade']) ?>">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputState">Estado</label>
-                    <select id="inputState" name="estado" class="form-control" value=<?php echo htmlspecialchars($linha['estado']) ?>>
+                    <select id="inputState" name="estado" class="form-control" value="<?php echo htmlspecialchars($linha['estado']) ?>">
                         <option selected>Escolha...</option>
                         <option>AC</option>
                         <option>AL</option>
@@ -133,7 +132,7 @@ include "header.php";
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputZip">CEP</label>
-                    <input type="text" name="cep" class="form-control" id="cep" onkeypress="mascara(this, '##.###-###')" placeholder="11.111-111" maxlength="10" value=<?php echo htmlspecialchars($linha['cep']) ?>>
+                    <input type="text" name="cep" class="form-control" id="cep" onkeypress="mascara(this, '##.###-###')" placeholder="11.111-111" maxlength="10" value="<?php echo htmlspecialchars($linha['cep']) ?>">
                 </div>
             </div>
         </fieldset>
