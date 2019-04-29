@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,43 +17,148 @@
     ?>
 
     <body>
+        
+         <!-- Script para fazer a máscara. Com ele, você pode definir qualquer tipo de máscara com o comando onkeypress="mascara(this, '###.###.###-##')". -->
+        <script language="JavaScript">
+            function mascara(t, mask) {
+                var i = t.value.length;
+                var saida = mask.substring(1, 0);
+                var texto = mask.substring(i)
+                //if (texto.substring(0, 1) != saida) {
+                //   t.value += texto.substring(0, 1);
+                //}
+            }
+        </script>
+        <!-- Fim do script -->
+        <!-- Formulário de Cadastro de Usuário -->
+        <form action="" method="POST" target="_self">
+            <fieldset>
+                <legend>Informações Pessoais:</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="name" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Cpf</th>
-                    <th>Telefone</th>
-                    <th>Endereço</th>
-                    <th>Complemento</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    <th>Cep</th>
-                    <th>Tipo</th>
-                </thead>
-                <tbody>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="inputEmail4">Nome</label>
+                        <input type="name" name="nome" class="form-control" id="inputNome4" placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputPassword4">Telefone</label>
+                        <input type="text" name="telefone" class="form-control" id="inputTelefone4" placeholder="(11)1111-1111" onkeypress="mascara(this, '(##)####-####')" maxlength="12">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputPassword4">CPF</label>
+                        <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Informações Residenciais:</legend>
+                <div class="form-group">
+                    <label for="inputAddress">Endereço</label>
+                    <input type="text" name="endereco" class="form-control" id="inputAddress" placeholder="Av. Rio Branco">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Complemento</label>
+                    <input type="text" name="complemento" class="form-control" id="inputAddress2" placeholder="Apartmento, estudio, or andar">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">Cidade</label>
+                        <input type="text" name="cidade" class="form-control" id="inputCity" placeholder="Cidade">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Estado</label>
+                        <select id="inputState" name="estado" class="form-control">
+                            <option selected>Escolha...</option>
+                            <option>AC</option>
+                            <option>AL</option>
+                            <option>AP</option>
+                            <option>AM</option>
+                            <option>BA</option>
+                            <option>CE</option>
+                            <option>DF</option>
+                            <option>ES</option>
+                            <option>GO</option>
+                            <option>MA</option>
+                            <option>MT</option>
+                            <option>MS</option>
+                            <option>MG</option>
+                            <option>PA</option>
+                            <option>PB</option>
+                            <option>PR</option>
+                            <option>PE</option>
+                            <option>PI</option>
+                            <option>RJ</option>
+                            <option>RN</option>
+                            <option>RS</option>
+                            <option>RO</option>
+                            <option>RR</option>
+                            <option>SC</option>
+                            <option>SP</option>
+                            <option>SE</option>
+                            <option>TO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">CEP</label>
+                        <input type="text" name="cep" class="form-control" id="cep" onkeypress="mascara(this, '##.###-###')" placeholder="11.111-111" maxlength="10">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Administrativo:</legend>
+                <div>
+                    <label for="inputType">Tipo de Usuiário</label>
                     <?php
-                        include_once("conexao.php");/* Estabelece a conexão */
-                        $sql = "SELECT * FROM usuarios";
-                        $resultado = mysqli_query($conexao, $sql);
-                        if (mysqli_num_rows($resultado) > 0) {
-                            /* Dados de saída de cada linha */
-                            while($linha = mysqli_fetch_assoc($resultado)) {
-                                echo "<tr><td>" . $linha["nome"].  "</td><td>" . $linha["email"] . "</td><td>" . $linha["cpf"] . "</td><td>" . $linha["telefone"] . "</td><td>". $linha["endereco"] . "</td><td>" . $linha["complemento"] . "</td><td>" . $linha["cidade"] . "</td><td>" . $linha["estado"] . "</td><td>" . $linha["cep"] . "</td><td>" . $linha["tipo"] . "</td></tr>";
-                            }
-                        } else {
-                            echo "0 results";
-                        }
-                        mysqli_close($conexao);
+                    // A sessão precisa ser iniciada em cada página diferente
+                    if(!isset($_SESSION)) session_start();
+                    // Verifica o tipo de usuario
+                    if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
+                        echo "<select for='inputType' name='tipo' class='form-control'>"."<option value='1'>Cliente</option>"."<option value='2'>Funcionário</option>"."</select>";
+                    }else{
+                        echo "<select for='inputType' name='tipo' class='form-control'>".
+                        "<option value='1'>Cliente</option>"."</select>";
+                    }
                     ?>
-                </tbody>
-            </table>
+                    
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
+        </form>
 
-        </div>
+        <?php
 
-        <?php 
-            include "footer.php";
-        ?>
+
+        if(isset($_POST["submit"]) && isset($_GET["cpf"])){
+            include_once("conexao.php");
+
+            $email = $_POST['email'];
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $cpf = $_POST['cpf'];
+            $endereco = $_POST['endereco'];
+            $complemento = $_POST['complemento'];
+            $cidade = $_POST['cidade'];
+            $estado = $_POST['estado'];
+            $cep = $_POST['cep'];
+            $tipo = $_POST['tipo'];
+
+            $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep',`tipo`='$tipo' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
+
+            $salvar = mysqli_query($conexao, $atualizar);
+            
+        }
+    ?>
+
+    </body>
+
+    <?php 
+        include "footer.php";
+    ?>
 
 </html>        
