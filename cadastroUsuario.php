@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +22,8 @@ include "header.php";
 <hr>
 
 <body>
+
+
     <!-- Script para fazer a máscara. Com ele, você pode definir qualquer tipo de máscara com o comando onkeypress="mascara(this, '###.###.###-##')". -->
     <script language="JavaScript">
         function mascara(t, mask) {
@@ -118,10 +123,21 @@ include "header.php";
             <legend>Administrativo:</legend>
             <div>
                 <label for="inputType">Tipo de Usuiário</label>
-                <select for="inputType" name="tipo" class="form-control">
-                    <option value="0">Cliente</option>
-                    <option value="1">Funcionário</option>
-                </select>
+
+                <?php
+                // A sessão precisa ser iniciada em cada página diferente
+
+                // Verifica se não há a variável da sessão que identifica o usuário
+                
+                if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
+                    
+                    echo "<select for='inputType' name='tipo' class='form-control'>"."<option value='1'>Cliente</option>"."<option value='2'>Funcionário</option>"."</select>";
+                }else{
+                    echo "<select for='inputType' name='tipo' class='form-control'>".
+                    "<option value='1'>Cliente</option>"."</select>";
+                }
+                ?>
+                
             </div>
         </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
@@ -130,10 +146,7 @@ include "header.php";
     <?php
     /* Ligação com Banco de Dados */
     if (isset($_POST["submit"])) {
-        echo "<p>Test</p>";
         include_once("conexao.php"); /* Estabelece a conexão */
-
-        echo "<p>Test</p>";
         $email = $_POST['email'];
         $senha = $_POST['senha'];
         $nome = $_POST['nome'];
