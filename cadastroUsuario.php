@@ -22,17 +22,15 @@ include "header.php";
 <hr>
 
 <body>
-
-
     <!-- Script para fazer a máscara. Com ele, você pode definir qualquer tipo de máscara com o comando onkeypress="mascara(this, '###.###.###-##')". -->
     <script language="JavaScript">
         function mascara(t, mask) {
             var i = t.value.length;
             var saida = mask.substring(1, 0);
             var texto = mask.substring(i)
-            // if (texto.substring(0, 1) != saida) {
-            //     t.value += texto.substring(0, 1);
-            // }
+            //if (texto.substring(0, 1) != saida) {
+              //   t.value += texto.substring(0, 1);
+            //}
         }
     </script>
     <!-- Fim do script -->
@@ -125,11 +123,11 @@ include "header.php";
                 <label for="inputType">Tipo de Usuiário</label>
 
                 <?php
+                $primeiraVez = 1; // Quando for o priemiro acesso na pagina
                 // A sessão precisa ser iniciada em cada página diferente
-
-                // Verifica se não há a variável da sessão que identifica o usuário
-                
-                if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
+                //if(!isset($_SESSION)) session_start();
+                // Verifica o tipo de usuario
+                if ( $_SESSION['usuarioNiveisAcessoId'] == 0 || $primeiraVez != 1) {
                     
                     echo "<select for='inputType' name='tipo' class='form-control'>"."<option value='1'>Cliente</option>"."<option value='2'>Funcionário</option>"."</select>";
                 }else{
