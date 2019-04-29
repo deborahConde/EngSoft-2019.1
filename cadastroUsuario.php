@@ -123,11 +123,11 @@ include "header.php";
                 <label for="inputType">Tipo de Usuiário</label>
 
                 <?php
-                $primeiraVez = 1; // Quando for o priemiro acesso na pagina
+                //$_SESSION['usuarioNiveisAcessoId'] = 1;// Quando for o priemiro acesso na pagina
                 // A sessão precisa ser iniciada em cada página diferente
                 //if(!isset($_SESSION)) session_start();
                 // Verifica o tipo de usuario
-                if ( $_SESSION['usuarioNiveisAcessoId'] == 0 || $primeiraVez != 1) {
+                if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
                     
                     echo "<select for='inputType' name='tipo' class='form-control'>"."<option value='1'>Cliente</option>"."<option value='2'>Funcionário</option>"."</select>";
                 }else{
