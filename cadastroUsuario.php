@@ -29,10 +29,10 @@ include "header.php";
             var saida = mask.substring(1, 0);
             var texto = mask.substring(i);
             console.log(i, texto, texto.substring(0, 1), saida);
-            if (texto.substring(0, 1) != saida) {
-                console.log(texto.substring(0, 1));
-                t.value += texto.substring(0, 1);
-            }
+            //if (texto.substring(0, 1) != saida) {
+              //  console.log(texto.substring(0, 1));
+                //t.value += texto.substring(0, 1);
+            //}
         }
     </script>
     <!-- Fim do script -->
@@ -125,12 +125,8 @@ include "header.php";
                 <label for="inputType">Tipo de Usuário</label>
 
                 <?php
-                //$_SESSION['usuarioNiveisAcessoId'] = 1;// Quando for o priemiro acesso na pagina
-                // A sessão precisa ser iniciada em cada página diferente
-                //if(!isset($_SESSION)) session_start();
-                // Verifica o tipo de usuario
+                $_SESSION['usuarioNiveisAcessoId'];
                 if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
-                    
                     echo "<select for='inputType' name='tipo' class='form-control'>"."<option value='1'>Cliente</option>"."<option value='2'>Funcionário</option>"."</select>";
                 }else{
                     echo "<select for='inputType' name='tipo' class='form-control'>".

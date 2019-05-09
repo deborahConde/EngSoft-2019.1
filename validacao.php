@@ -31,12 +31,12 @@
         }else{    
             //Váriavel global recebendo a mensagem de erro
             $_SESSION['loginErro'] = "Usuário ou senha Inválido";
-            echo "Usuário ou senha Inválido";
+            $_SESSION['usuarioNiveisAcessoId'] = 1;
         }
     //O campo usuário e senha não preenchido entra no else e redireciona o usuário para a página de login
     }else{
         $_SESSION['loginErro'] = "Usuário ou senha inválido";
-        echo "Usuário ou senha Inválido";
+        $_SESSION['usuarioNiveisAcessoId'] = 1;
     }
 ?>
 
