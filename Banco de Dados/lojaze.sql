@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 19-Fev-2019 às 13:12
--- Versão do servidor: 5.7.21
--- PHP Version: 7.2.4
+-- Host: 127.0.0.1
+-- Generation Time: 15-Maio-2019 às 02:53
+-- Versão do servidor: 10.1.37-MariaDB
+-- versão do PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,8 +28,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `senha` varchar(40) NOT NULL,
   `nome` varchar(40) CHARACTER SET latin1 NOT NULL,
@@ -40,9 +39,37 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `cidade` varchar(40) CHARACTER SET latin1 NOT NULL,
   `estado` varchar(40) CHARACTER SET latin1 NOT NULL,
   `cep` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `tipo` int(5) NOT NULL,
-  PRIMARY KEY (`cpf`)
+  `tipo` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+--
+-- Estrutura da tabela `funcionarios`
+--
+
+CREATE TABLE `funcionarios` (
+  `id` varchar(20) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `cpf` varchar(14) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `salario` float NOT NULL,
+  `cargo` varchar(50) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Indexes for table `funcionarios`
+--
+ALTER TABLE `funcionarios`
+  ADD PRIMARY KEY (`id`,`cpf`) USING BTREE;
+
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`cpf`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
