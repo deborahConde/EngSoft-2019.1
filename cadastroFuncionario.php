@@ -143,8 +143,12 @@ include "header.php";
                     <input type="number" name="salario" class="form-control" id="salario">
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputSalario">Cargo</label>
-                    <input type="text" name="cargo" class="form-control" id="cargo">                
+                    <label for="inputCargo">Cargo</label>
+                    <select id="inputCargo" name="cargo" class="form-control">
+                        <option selected>Escolha...</option>
+                        <option>Vendedor</option>
+                        <option>Administrador</option>
+                    </select>       
                 </div>
             </div>
         </fieldset>
@@ -165,10 +169,14 @@ include "header.php";
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
         $cep = $_POST['cep'];
-        $tipo = 2;
         $codigoFunc = $_POST['codigoFunc'];
         $salario = $_POST['salario'];
         $cargo = $_POST['cargo'];
+        $tipo = 2;
+
+        if($cargo == "Administrador"){
+            $tipo = 0;
+        }
 
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
