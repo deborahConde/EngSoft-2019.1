@@ -20,7 +20,7 @@ include "header.php";
 <body>
     <script language="JavaScript">
         function deletarUsuario(cpf) {
-            fetch(`/deletarUsuario.php?cpf=${cpf}`)
+            fetch(`./deletarUsuario.php?cpf=${cpf}`)
                 .then(window.location.reload())
                 .catch(console.error);
         }
@@ -59,12 +59,10 @@ include "header.php";
                             "</td><td>" . $linha["cep"] .
                             "</td><td>" . $linha["tipo"] .
                             "</td><td>" .
-                            "<a href=\"/editarUsuario.php?cpf=$linha[cpf]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
+                           "<a href=\"./editarUsuario.php?cpf=$linha[cpf]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
                             "<a href=\"javascript:deletarUsuario('$linha[cpf]')\"><i class=\"fas fa-trash\"></i></a>" .
                             "</td></tr>";
                     }
-                } else {
-                    echo "0 results";
                 }
                 mysqli_close($conexao);
                 ?>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cadastro de Usuário</title>
+    <title>Cadastro de Funcionário</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@ include "header.php";
         ?>
     </fieldset>
     <!-- Formulário de Cadastro de Usuário -->
-    <form action="cadastroUsuario.php" method="POST" target="_self">
+    <form action="cadastroFuncionario.php" method="POST" target="_self">
         <fieldset>
             <legend>Informações Pessoais:</legend>
             <div class="form-row">
@@ -127,7 +127,24 @@ include "header.php";
                 <div class="form-group col-md-2">
                     <label for="inputZip">CEP</label>
                     <input type="text" name="cep" class="form-control" id="cep" onkeypress="mascara(this, '##.###-###')" placeholder="11.111-111" maxlength="10">
-                    
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Dados do Funcionario:</legend>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputCodigo">Codigo</label>
+                    <input type="text" name="codigoFunc" class="form-control" id="codigoFunc" placeholder="xxxx.xx.xx.xx" maxlenght="20">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputSalario">Salario</label>
+                    <input type="number" name="salario" class="form-control" id="salario">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputSalario">Cargo</label>
+                    <input type="text" name="cargo" class="form-control" id="cargo">                
                 </div>
             </div>
         </fieldset>
@@ -148,18 +165,25 @@ include "header.php";
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
         $cep = $_POST['cep'];
-        $tipo = 1;
+        $tipo = 2;
+        $codigoFunc = $_POST['codigoFunc'];
+        $salario = $_POST['salario'];
+        $cargo = $_POST['cargo'];
+
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
+        
+        $sql2 = "insert into funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
+        $salvar2 = mysqli_query($conexao, $sql2);/*Escreve os dandos no banco */
 
-        if ($salvar) {
+        if ($salvar && $salvar2) {
             ?>
-            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+            <div class="alert alert-success">Funcionário cadastrado com sucesso!</div>
         <?php
     } else {
         die(mysqli_error($conexao));
         ?>
-            <div class="alert alert-warning">Falha ao cadastrar usuário!</div>
+            <div class="alert alert-warning">Falha ao cadastrar funcioário!</div>
         <?php
     }
 

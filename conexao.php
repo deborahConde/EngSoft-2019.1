@@ -9,6 +9,3 @@ if(!$conexao)
 {
     echo "Falha na conexão com o BD!";/* Exibe uma mensagem de erro caso a conexão falhe */
 }
-
-
-?>
