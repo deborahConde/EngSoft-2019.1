@@ -131,6 +131,21 @@ include "header.php";
                 </div>
             </div>
         </fieldset>
+        <fieldset>
+            <legend>Administrativo:</legend>
+            <select name="test" id="test" class="form-control">
+            <option selected>Escolha...</option>
+                    <option value=1>Cliente</option>
+                    <option value=2>Vendedor</option>
+                    <option value=3>Administrador</option>
+            </select>
+            <?php
+                $test = $_GET['test'];
+                if($test == 1){
+                    echo "testtest";
+                }
+            ?>
+        </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
     <!-- Fim do Formulário de Cadastro de Usuário  -->

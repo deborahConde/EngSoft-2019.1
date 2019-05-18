@@ -64,7 +64,6 @@ CREATE TABLE `funcionarios` (
 --
 ALTER TABLE `funcionarios`
   ADD PRIMARY KEY (`id`,`cpf`) USING BTREE;
-
 --
 -- Indexes for table `usuarios`
 --
