@@ -48,7 +48,7 @@ include "header.php";
         ?>
     </fieldset>
     <!-- Formulário de Cadastro de Usuário -->
-    <form action="cadastroUsuario.php" method="POST" target="_self">
+    <form action="cadastroCliente.php" method="POST" target="_self">
         <fieldset>
             <legend>Informações Pessoais:</legend>
             <div class="form-row">
@@ -73,6 +73,10 @@ include "header.php";
                 <div class="form-group col-md-2">
                     <label for="inputPassword4">CPF</label>
                     <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputPassword4">CNPJ</label>
+                    <input type="text" name="cnpj" class="form-control" id="inputCNPJ4" placeholder="11.111.111/1111-11" onkeypress="mascara(this, '##.###.###/####-##')" maxlength="14">
                 </div>
             </div>
         </fieldset>
@@ -131,21 +135,6 @@ include "header.php";
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Administrativo:</legend>
-            <select name="test" id="test" class="form-control">
-            <option selected>Escolha...</option>
-                    <option value=1>Cliente</option>
-                    <option value=2>Vendedor</option>
-                    <option value=3>Administrador</option>
-            </select>
-            <?php
-                $test = $_GET['test'];
-                if($test == 1){
-                    echo "testtest";
-                }
-            ?>
-        </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
     <!-- Fim do Formulário de Cadastro de Usuário  -->
@@ -158,6 +147,7 @@ include "header.php";
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
         $cpf = $_POST['cpf'];
+        $cnpj = $_POST['cnpj'];
         $endereco = $_POST['endereco'];
         $complemento = $_POST['complemento'];
         $cidade = $_POST['cidade'];
@@ -167,14 +157,17 @@ include "header.php";
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
 
-        if ($salvar) {
+        $sql3 = "insert into clientes (email,senha,nome,telefone,cpf,cnpj,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$cnpj','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
+        $salvar3 = mysqli_query($conexao, $sql3);/*Escreve os dandos no banco */
+
+        if ($salvar && $salvar3) {
             ?>
-            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+            <div class="alert alert-success">Cliente cadastrado com sucesso!</div>
         <?php
     } else {
         die(mysqli_error($conexao));
         ?>
-            <div class="alert alert-warning">Falha ao cadastrar usuário!</div>
+            <div class="alert alert-warning">Falha ao cadastrar cliente!</div>
         <?php
     }
 

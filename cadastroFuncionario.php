@@ -40,7 +40,7 @@ include "header.php";
         <?php
             if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
 
-                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
+                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
             }
             else{
                 echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='visualizarUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
