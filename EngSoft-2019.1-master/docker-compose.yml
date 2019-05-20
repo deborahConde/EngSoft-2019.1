@@ -1,0 +1,27 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: web.Dockerfile
+    volumes:
+      - ".:/var/www/html"
+    ports:
+      - 3000:80
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lojaze
+    volumes:
+      - "my-datavolume:/var/lib/mysql"
+      - "./Banco de Dados:/usr/sql"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  my-datavolume:
