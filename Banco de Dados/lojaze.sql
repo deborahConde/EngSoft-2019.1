@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `estado` varchar(40) CHARACTER SET latin1 NOT NULL,
   `cep` varchar(10) CHARACTER SET latin1 NOT NULL,
   `tipo` int(5) NOT NULL,
-  PRIMARY KEY (`nome`)
+  PRIMARY KEY (`cpf`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 COMMIT;
 

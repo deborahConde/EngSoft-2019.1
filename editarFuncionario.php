@@ -11,23 +11,25 @@ if (isset($_POST["cpf"])) {
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
     $cep = $_POST['cep'];
+    $tipo = $_POST['codigoFunc'];
     $salario = $_POST['salario'];
     $cargo = $_POST['cargo'];
     $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
-
-    $atualizarFuncionario = "UPDATE `lojaze`.`usuarios` SET `salario`='$email',`cargo`='$telefone' WHERE (id=\"" . $_POST['codigoFunc'] . "\") \"and\" (cpf=\"" . $_GET['cpf'] . "\")";
+    
+    $atualizarFuncionario = "UPDATE `lojaze`.`funcionarios` SET `salario`='$salario',`cargo`='$cargo' WHERE (`funcionarios`.id=\"" . $_GET['id'] . "\") AND (`funcionarios`.cpf=\"" . $_GET['cpf'] . "\")";
     $salvar = mysqli_query($conexao, $atualizar);
     $salvar2 = mysqli_query($conexao,$atualizarFuncionario);
+
 }
 ?>
 <?php
 include_once("conexao.php"); /* Estabelece a conexão */
 $sql = "SELECT * FROM usuarios where cpf='$_GET[cpf]'";
 $resultado = mysqli_query($conexao, $sql);
+$sql2 = "SELECT * FROM funcionarios WHERE cpf='$_GET[cpf]'" ;
+$resultado2 = mysqli_query($conexao, $sql2);
 if (mysqli_num_rows($resultado) === 1) {
     $linha = mysqli_fetch_assoc($resultado);
-    $sql2 = "SELECT * FROM funcionarios WHERE (cpf=\"" . $linha['cpf'] . "\")" ;
-    $resultado2 = mysqli_query($conexao, $sql2);
     $linha2 = mysqli_fetch_assoc($resultado2);
 }
 ?>
@@ -156,7 +158,7 @@ include "header.php";
                 </div>
                 <div class="form-group col-md-5">
                     <label for="inputCargo">Cargo</label>
-                    <select id="inputCargo" name="cargo" class="form-control" value="<?php echo htmlspecialchars($linha2['cargo']) ?>">
+                    <select id="inputCargo" name="cargo" class="form-control" id="cargo" value="<?php echo htmlspecialchars($linha2['cargo']) ?>">
                         <option selected>Escolha...</option>
                         <option>Vendedor</option>
                         <option>Administrador</option>

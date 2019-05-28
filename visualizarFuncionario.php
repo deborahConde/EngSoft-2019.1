@@ -19,7 +19,7 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function deletarUsuario(cpf) {
+        function deletarUsuario(cpf, id) {
             fetch(`./deletarUsuario.php?cpf=${cpf}`)
                 .then(window.location.reload())
                 .catch(console.error);
@@ -66,7 +66,7 @@ include "header.php";
                             $linha2 = mysqli_fetch_assoc($resultado2);
                             echo "<td>". $linha2["id"] ."</td><td>". $linha2["salario"] ."</td><td>". $linha2["cargo"]."</td>";
 
-                            echo "<td><a href=\"./editarFuncionario.php?cpf=$linha[cpf]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
+                            echo "<td><a href=\"./editarFuncionario.php?cpf=$linha[cpf]&id=$linha2[id]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
                             "<a href=\"javascript:deletarUsuario('$linha[cpf]')\"><i class=\"fas fa-trash\"></i></a>" .
                             "</td></tr>";
                         }
