@@ -178,15 +178,13 @@ include "header.php";
             $tipo = 0;
         }
 
-        $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
+        $sql = "insert into lojaze.usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
-        
-        $sql2 = "insert into funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
-        $salvar2 = mysqli_query($conexao, $sql2);/*Escreve os dandos no banco */
 
-        if ($salvar && $salvar2) {
+        if ($salvar) {
             ?>
-            <div class="alert alert-success">Funcionário cadastrado com sucesso!</div>
+            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+            
         <?php
     } else {
         die(mysqli_error($conexao));
@@ -195,6 +193,9 @@ include "header.php";
         <?php
     }
 
+
+    $sql2 = "insert into lojaze.funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
+    $salvar2 = mysqli_query($conexao, $sql2);/*Escreve os dandos no banco */
     mysqli_close($conexao);
 }
 

@@ -48,7 +48,7 @@ include "header.php";
         ?>
     </fieldset>
     <!-- Formulário de Cadastro de Usuário -->
-    <form action="cadastroUsuario.php" method="POST" target="_self">
+    <form action="" method="POST" target="_self">
         <fieldset>
             <legend>Informações Pessoais:</legend>
             <div class="form-row">
@@ -162,7 +162,7 @@ include "header.php";
         $complemento = $_POST['complemento'];
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
-        $cep = $_POST['cep'];
+        $cep = $_POST['cep'];   
         $tipo = 1;
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
