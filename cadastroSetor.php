@@ -86,12 +86,12 @@ include "header.php";
 
         if ($salvar) {
             ?>
-            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+            <div class="alert alert-success">Setor cadastrado com sucesso!</div>
         <?php
     } else {
         die(mysqli_error($conexao));
         ?>
-            <div class="alert alert-warning">Falha ao cadastrar usuário!</div>
+            <div class="alert alert-warning">Falha ao cadastrar Setor!</div>
         <?php
     }
 

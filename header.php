@@ -30,6 +30,9 @@
       <li>
         <a class="nav-link" href="cadastroSetor.php"> Cadastrar Setor</a>
       </li>
+      <li>
+        <a class="nav-link" href="visualizarSetor.php">Visualizar Setor</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="login.php">Login</a>
       </li>
