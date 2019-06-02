@@ -19,8 +19,8 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function deletarUsuario(cpf) {
-            fetch(`./deletarUsuario.php?cpf=${cpf}`)
+        function deletarUsuario(id) {
+            fetch(`./deletarUsuario.php?id=${id}`)
                 .then(window.location.reload())
                 .catch(console.error);
         }
