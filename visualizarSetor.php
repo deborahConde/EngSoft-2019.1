@@ -54,7 +54,7 @@ include "header.php";
                             "</td><td>" . $linha["id"] .
                             "</td><td>" . $linhaUsuario["nome"] .
                             "</td><td>" .
-                           "<a href=\"./editarUsuario.php?cpf=$linha[id]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
+                           "<a href=\"./editarSetor.php?id=$linha[id]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
                             "<a href=\"javascript:deletarUsuario('$linha[id]')\"><i class=\"fas fa-trash\"></i></a>" .
                             "</td></tr>";
                     }

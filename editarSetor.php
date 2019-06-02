@@ -1,13 +1,21 @@
+<?php session_start(); ?>
+
 <?php
-    session_start();
-    
+include_once("conexao.php"); /* Estabelece a conexão */
+$sql = "SELECT * FROM setor where id='$_GET[id]'";
+$resultado = mysqli_query($conexao, $sql);
+if (mysqli_num_rows($resultado) === 1) {
+    $linha = mysqli_fetch_assoc($resultado);
+}
 ?>
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cadastro de Setor</title>
+    <title>Editar Setor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -19,23 +27,7 @@
 include "header.php";
 ?>
 
-<hr>
-
 <body>
-    <!-- Script para fazer a máscara. Com ele, você pode definir qualquer tipo de máscara com o comando onkeypress="mascara(this, '###.###.###-##')". -->
-    <script language="JavaScript">
-        function mascara(t, mask) {
-            var i = t.value.length;
-            var saida = mask.substring(1, 0);
-            var texto = mask.substring(i);
-            console.log(i, texto, texto.substring(0, 1), saida);
-            //if (texto.substring(0, 1) != saida) {
-              //  console.log(texto.substring(0, 1));
-                //t.value += texto.substring(0, 1);
-            //}
-        }
-    </script>
-    <!-- Fim do script -->
     <!-- Formulário de Cadastro de Setor -->
     <form action="" method="POST" target="_self">
         <fieldset>
@@ -43,11 +35,11 @@ include "header.php";
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputName">Nome</label>
-                    <input type="name" name="nome" class="form-control" id="inputName" placeholder="Nome">
+                    <input type="name" name="nome" class="form-control" id="inputName" placeholder="Nome" value="<?php echo htmlspecialchars($linha['nome']) ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCode">Codigo</label>
-                    <input type="text" name="codigo" class="form-control" id="inputCode" placeholder="Codigo">
+                    <input type="text" name="codigo" class="form-control" id="inputCode" placeholder="Codigo" value="<?php echo htmlspecialchars($linha['id']) ?>">
                 </div>
             </div>
             <div>
@@ -72,37 +64,24 @@ include "header.php";
         </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
-    <!-- Fim do Formulário de Cadastro de Setor  -->
+    <!-- Fim do Formulário de Cadastro de Setor -->
     <?php
-    /* Ligação com Banco de Dados */
-    if (isset($_POST["submit"])) {
-        include_once("conexao.php"); /* Estabelece a conexão */
-        $nome = $_POST['nome'];
+    if (isset($_POST["id"])) {
+        include_once("conexao.php");
         $codigo = $_POST['codigo'];
-        $administrador = $_POST['nome_fantasia'];
-    
-        $sql = "insert into setor (id,nome,administrador) values ('$codigo','$nome','$administrador')";
-        $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
+        $nome = $_POST['nome'];
+        $administrador = $_POST['administrador'];
 
-        if ($salvar) {
-            ?>
-            <div class="alert alert-success">Setor cadastrado com sucesso!</div>
-        <?php
-    } else {
-        die(mysqli_error($conexao));
-        ?>
-            <div class="alert alert-warning">Falha ao cadastrar Setor!</div>
-        <?php
+        $atualizar = "UPDATE lojaze.setor SET `id`='$codigo', `nome`='$nome' WHERE (id=\"" . $_GET['id'] . "\")";
+        $salvar = mysqli_query($conexao, $atualizar);
     }
+    ?>
 
-    mysqli_close($conexao);
-}
 
-?>
+    </body>
 
-</body>
-<hr>
 <?php
 include "footer.php";
 ?>
+
 </html>
