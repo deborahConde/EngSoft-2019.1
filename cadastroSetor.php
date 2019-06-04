@@ -79,11 +79,9 @@ include "header.php";
         include_once("conexao.php"); /* Estabelece a conexão */
         $nome = $_POST['nome'];
         $codigo = $_POST['codigo'];
-        $administrador = $_POST['nome_fantasia'];
-    
-        $sql = "insert into setor (id,nome,administrador) values ('$codigo','$nome','$administrador')";
+        $administrador = $_POST['administrador'];
+        $sql = "insert into setor (codigo,nome,administrador) values ('$codigo','$nome','$administrador')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
-
         if ($salvar) {
             ?>
             <div class="alert alert-success">Setor cadastrado com sucesso!</div>

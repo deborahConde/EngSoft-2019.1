@@ -1,10 +1,20 @@
 <?php session_start(); ?>
+<?php
+    if (isset($_POST["codigo"])) {
+        include_once("conexao.php");
+        $codigo = $_POST['codigo'];
+        $nome = $_POST['nome'];
+        $administrador = $_POST['administrador'];
 
+        $atualizar = "UPDATE lojaze.setor SET `codigo`='$codigo', `nome`='$nome', `administrador`='$administrador' WHERE (setor.codigo = '$_GET[codigo]')";
+        $salvar = mysqli_query($conexao, $atualizar);
+    }
+    ?>
 <?php
 include_once("conexao.php"); /* Estabelece a conexão */
-$sql = "SELECT * FROM setor where id='$_GET[id]'";
+$sql = "SELECT * FROM setor where codigo='$_GET[codigo]'";
 $resultado = mysqli_query($conexao, $sql);
-if (mysqli_num_rows($resultado) === 1) {
+if (mysqli_num_rows($resultado) == 1) {
     $linha = mysqli_fetch_assoc($resultado);
 }
 ?>
@@ -39,7 +49,7 @@ include "header.php";
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCode">Codigo</label>
-                    <input type="text" name="codigo" class="form-control" id="inputCode" placeholder="Codigo" value="<?php echo htmlspecialchars($linha['id']) ?>">
+                    <input type="text" name="codigo" class="form-control" id="inputCode" placeholder="Codigo" value="<?php echo htmlspecialchars($linha['codigo']) ?>">
                 </div>
             </div>
             <div>
@@ -65,19 +75,6 @@ include "header.php";
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
     <!-- Fim do Formulário de Cadastro de Setor -->
-    <?php
-    if (isset($_POST["id"])) {
-        include_once("conexao.php");
-        $codigo = $_POST['codigo'];
-        $nome = $_POST['nome'];
-        $administrador = $_POST['administrador'];
-
-        $atualizar = "UPDATE lojaze.setor SET `id`='$codigo', `nome`='$nome' WHERE (id=\"" . $_GET['id'] . "\")";
-        $salvar = mysqli_query($conexao, $atualizar);
-    }
-    ?>
-
-
     </body>
 
 <?php

@@ -19,8 +19,8 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function deletarUsuario(id) {
-            fetch(`./deletarUsuario.php?id=${id}`)
+        function deletarUsuario(codigo) {
+            fetch(`./deletarSetor.php?codigo=${codigo}`)
                 .then(window.location.reload())
                 .catch(console.error);
         }
@@ -51,11 +51,11 @@ include "header.php";
                         $linhaUsuario = mysqli_fetch_assoc($resultadoUsuario);
                         /* Preenche a tabela com os dados */
                         echo "<tr><td>" . $linha["nome"] .
-                            "</td><td>" . $linha["id"] .
+                            "</td><td>" . $linha["codigo"] .
                             "</td><td>" . $linhaUsuario["nome"] .
                             "</td><td>" .
-                           "<a href=\"./editarSetor.php?id=$linha[id]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
-                            "<a href=\"javascript:deletarUsuario('$linha[id]')\"><i class=\"fas fa-trash\"></i></a>" .
+                           "<a href=\"./editarSetor.php?codigo=$linha[codigo]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
+                            "<a href=\"javascript:deletarUsuario('$linha[codigo]')\"><i class=\"fas fa-trash\"></i></a>" .
                             "</td></tr>";
                     }
                 }
