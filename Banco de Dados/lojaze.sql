@@ -37,7 +37,7 @@ CREATE TABLE `clientes` (
 
 
 CREATE TABLE `setor` (
-  `id` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `codigo` varchar(20) CHARACTER SET latin1 NOT NULL,
   `nome` varchar(140) CHARACTER SET latin1 NOT NULL,
   `administrador` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -59,7 +59,7 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`cpf`);
 
 ALTER TABLE `setor`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`codigo`);
 
 ALTER TABLE `funcionarios`
   ADD CONSTRAINT `fk_UF` FOREIGN KEY (`cpf`) REFERENCES `usuarios` (`cpf`) ON DELETE CASCADE;

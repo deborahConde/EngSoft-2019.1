@@ -1,26 +1,35 @@
 <?php session_start(); ?>
 <?php
-if (isset($_POST["cpf"])) {
-    include_once("conexao.php");
-    $email = $_POST['email'];
-    $nome = $_POST['nome'];
-    $telefone = $_POST['telefone'];
-    $cpf = $_POST['cpf'];
-    $endereco = $_POST['endereco'];
-    $complemento = $_POST['complemento'];
-    $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
-    $cep = $_POST['cep'];
-    $tipo = $_POST['codigoFunc'];
-    $salario = $_POST['salario'];
-    $cargo = $_POST['cargo'];
-    $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
-    
-    $atualizarFuncionario = "UPDATE `lojaze`.`funcionarios` SET `salario`='$salario',`cargo`='$cargo' WHERE (`funcionarios`.id=\"" . $_GET['id'] . "\") AND (`funcionarios`.cpf=\"" . $_GET['cpf'] . "\")";
-    $salvar = mysqli_query($conexao, $atualizar);
-    $salvar2 = mysqli_query($conexao,$atualizarFuncionario);
-
-}
+    if (isset($_POST["cpf"])) {
+            include_once("conexao.php");
+            $email = $_POST['email'];
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $cpf = $_POST['cpf'];
+            $endereco = $_POST['endereco'];
+            $complemento = $_POST['complemento'];
+            $cidade = $_POST['cidade'];
+            $estado = $_POST['estado'];
+            $cep = $_POST['cep'];
+            $tipo = $_POST['codigoFunc'];
+            $id = $_POST['codigoFunc'];
+            $salario = $_POST['salario'];
+            $cargo = $_POST['cargo'];
+            $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
+            $salvar = mysqli_query($conexao, $atualizar);
+            $atualizarFuncionario = "UPDATE `lojaze`.`funcionarios` SET `id`='$id', `salario`='$salario',`cargo`='$cargo' WHERE (`funcionarios`.id=\"" . $_GET['id'] . "\") AND (`funcionarios`.cpf=\"" . $_GET['cpf'] . "\")";
+            $salvar2 = mysqli_query($conexao,$atualizarFuncionario);
+            if ($salvar & $salvar2) {
+                ?>
+                    <div class="alert alert-success">Funcionário atualizado com sucesso!</div>
+                <?php
+            } else {
+                die(mysqli_error($conexao));
+                ?>
+                    <div class="alert alert-warning">Falha ao atualizar funcioário!</div>
+                <?php
+            }
+    }
 ?>
 <?php
 include_once("conexao.php"); /* Estabelece a conexão */
@@ -158,7 +167,7 @@ include "header.php";
                 </div>
                 <div class="form-group col-md-5">
                     <label for="inputCargo">Cargo</label>
-                    <select id="inputCargo" name="cargo" class="form-control" id="cargo" value="<?php echo htmlspecialchars($linha2['cargo']) ?>">
+                    <select id="inputCargo" name="cargo" class="form-control" id="cargo">
                         <option selected>Escolha...</option>
                         <option>Vendedor</option>
                         <option>Administrador</option>

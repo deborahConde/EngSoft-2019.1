@@ -182,16 +182,16 @@ include "header.php";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
 
         if ($salvar) {
+                ?>
+                <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+                
+            <?php
+        } else {
+            die(mysqli_error($conexao));
             ?>
-            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
-            
-        <?php
-    } else {
-        die(mysqli_error($conexao));
-        ?>
-            <div class="alert alert-warning">Falha ao cadastrar funcioário!</div>
-        <?php
-    }
+                <div class="alert alert-warning">Falha ao cadastrar funcioário!</div>
+            <?php
+        }
 
 
     $sql2 = "insert into lojaze.funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
