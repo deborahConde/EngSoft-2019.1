@@ -20,11 +20,7 @@
         <!-- Formulário de Login -->
         <form action="validacao.php" method="post">
         <fieldset>
-<<<<<<< HEAD
-        <legend>Dados De Login</legend>
-=======
         <legend>Dados de Login</legend>
->>>>>>> d53f5a8457d89ec3d80f7f295f63ed4a361521ae
             <label for="email">Usuário</label>
             <input type="text" name="email" id="email" maxlength="25" />
             <label for="senha">Senha</label>
