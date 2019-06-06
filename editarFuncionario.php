@@ -1,27 +1,45 @@
 <?php session_start(); ?>
 <?php
-if (isset($_POST["cpf"])) {
-    include_once("conexao.php");
-    $email = $_POST['email'];
-    $nome = $_POST['nome'];
-    $telefone = $_POST['telefone'];
-    $cpf = $_POST['cpf'];
-    $endereco = $_POST['endereco'];
-    $complemento = $_POST['complemento'];
-    $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
-    $cep = $_POST['cep'];
-    $tipo = $_POST['tipo'];
-    $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep',`tipo`='$tipo' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
-    $salvar = mysqli_query($conexao, $atualizar);
-}
+    if (isset($_POST["cpf"])) {
+            include_once("conexao.php");
+            $email = $_POST['email'];
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $cpf = $_POST['cpf'];
+            $endereco = $_POST['endereco'];
+            $complemento = $_POST['complemento'];
+            $cidade = $_POST['cidade'];
+            $estado = $_POST['estado'];
+            $cep = $_POST['cep'];
+            $tipo = $_POST['codigoFunc'];
+            $id = $_POST['codigoFunc'];
+            $salario = $_POST['salario'];
+            $cargo = $_POST['cargo'];
+            $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
+            $salvar = mysqli_query($conexao, $atualizar);
+            $atualizarFuncionario = "UPDATE `lojaze`.`funcionarios` SET `id`='$id', `salario`='$salario',`cargo`='$cargo' WHERE (`funcionarios`.id=\"" . $_GET['id'] . "\") AND (`funcionarios`.cpf=\"" . $_GET['cpf'] . "\")";
+            $salvar2 = mysqli_query($conexao,$atualizarFuncionario);
+            if ($salvar & $salvar2) {
+                ?>
+                    <div class="alert alert-success">Funcionário atualizado com sucesso!</div>
+                <?php
+            } else {
+                die(mysqli_error($conexao));
+                ?>
+                    <div class="alert alert-warning">Falha ao atualizar funcioário!</div>
+                <?php
+            }
+    }
 ?>
 <?php
 include_once("conexao.php"); /* Estabelece a conexão */
 $sql = "SELECT * FROM usuarios where cpf='$_GET[cpf]'";
 $resultado = mysqli_query($conexao, $sql);
+$sql2 = "SELECT * FROM funcionarios WHERE cpf='$_GET[cpf]'" ;
+$resultado2 = mysqli_query($conexao, $sql2);
 if (mysqli_num_rows($resultado) === 1) {
     $linha = mysqli_fetch_assoc($resultado);
+    $linha2 = mysqli_fetch_assoc($resultado2);
 }
 ?>
 
@@ -31,7 +49,7 @@ if (mysqli_num_rows($resultado) === 1) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Editar Usuário</title>
+    <title>Editar Funcionário</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -137,26 +155,28 @@ include "header.php";
             </div>
         </fieldset>
         <fieldset>
-            <legend>Administrativo:</legend>
-            <div>
-                <label for="inputType">Tipo de Usuiário</label>
-                <?php
-                // A sessão precisa ser iniciada em cada página diferente
-                if (!isset($_SESSION)) session_start();
-                // Verifica o tipo de usuario
-                if ($_SESSION['usuarioNiveisAcessoId'] == 0) {
-                    echo "<select for='inputType' name='tipo' class='form-control' value=$linha[email]>" . "<option value='1'>Cliente</option>" . "<option value='2'>Funcionário</option>" . "</select>";
-                } else {
-                    echo "<select for='inputType' name='tipo' class='form-control' value=$linha[email]>" .
-                        "<option value='1'>Cliente</option>" . "</select>";
-                }
-                ?>
+            <legend>Dados do Funcionario:</legend>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputCodigo">Codigo</label>
+                    <input type="text" name="codigoFunc" class="form-control" id="codigoFunc" placeholder="xxxx.xx.xx.xx" maxlenght="20" value="<?php echo htmlspecialchars($linha2['id']) ?>">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputSalario">Salario</label>
+                    <input type="number" name="salario" class="form-control" id="salario" value="<?php echo htmlspecialchars($linha2['salario']) ?>" >
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputCargo">Cargo</label>
+                    <select id="inputCargo" name="cargo" class="form-control" id="cargo">
+                        <option selected>Escolha...</option>
+                        <option>Vendedor</option>
+                        <option>Administrador</option>
+                    </select>       
+                </div>
             </div>
         </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
-
-
 
 </body>
 

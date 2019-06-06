@@ -6,6 +6,7 @@ if (isset($_POST["cpf"])) {
     $nome = $_POST['nome'];
     $telefone = $_POST['telefone'];
     $cpf = $_POST['cpf'];
+    $cnpj = $_POST['cnpj'];
     $endereco = $_POST['endereco'];
     $complemento = $_POST['complemento'];
     $cidade = $_POST['cidade'];
@@ -13,7 +14,10 @@ if (isset($_POST["cpf"])) {
     $cep = $_POST['cep'];
     $tipo = $_POST['tipo'];
     $atualizar = "UPDATE `lojaze`.`usuarios` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep',`tipo`='$tipo' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
+    $atualizarCliente = "UPDATE `lojaze`.`clientes` SET `nome`='$nome', `email`='$email',`telefone`='$telefone',`cpf`='$cpf',`cnpj`='$cnpj',`endereco`='$endereco',`complemento`='$complemento',`cidade`='$cidade',`estado`='$estado',`cep`='$cep',`tipo`='$tipo' WHERE (cpf=\"" . $_GET['cpf'] . "\")";
+    
     $salvar = mysqli_query($conexao, $atualizar);
+    $salvar3 = mysqli_query($conexao, $atualizarCliente);
 }
 ?>
 <?php
@@ -22,6 +26,9 @@ $sql = "SELECT * FROM usuarios where cpf='$_GET[cpf]'";
 $resultado = mysqli_query($conexao, $sql);
 if (mysqli_num_rows($resultado) === 1) {
     $linha = mysqli_fetch_assoc($resultado);
+    $sql3 = "SELECT * FROM clientes WHERE (cpf=\"" . $linha['cpf'] . "\")" ;
+    $resultado3 = mysqli_query($conexao, $sql3);
+    $linha3 = mysqli_fetch_assoc($resultado3);
 }
 ?>
 
@@ -31,7 +38,7 @@ if (mysqli_num_rows($resultado) === 1) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Editar Usuário</title>
+    <title>Editar Cliente</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -79,6 +86,10 @@ include "header.php";
                 <div class="form-group col-md-2">
                     <label for="inputPassword4">CPF</label>
                     <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14" value="<?php echo htmlspecialchars($linha['cpf']) ?>">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputPassword4">CNPJ</label>
+                    <input type="text" name="cnpj" class="form-control" id="inputCNPJ4" placeholder="11.111.111/1111-11" onkeypress="mascara(this, '##.###.###/####-##')" maxlength="14" value="<?php echo htmlspecialchars($linha3['cnpj']) ?>">
                 </div>
             </div>
         </fieldset>

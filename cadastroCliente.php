@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cadastro de Usuário</title>
+    <title>Cadastro de Cliente</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -36,6 +36,7 @@ include "header.php";
     </script>
     <!-- Fim do script -->
     <fieldset>
+    <!-- Escolha Cliente ou Funcionario -->
         <legend>Tipo de Usuário:</legend>
         <?php
             if(!isset($_SESSION['usuarioNiveisAcessoId'])){/* Verifica se a variavel usuarioNiveisAcessoId não existe */
@@ -45,12 +46,13 @@ include "header.php";
                 echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
             }
             else{
-                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
+                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='visualizarUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
             }
         ?>
     </fieldset>
+    <!-- Fim da escolha Cliente ou Funcionario -->
     <!-- Formulário de Cadastro de Usuário -->
-    <form action="" method="POST" target="_self">
+    <form action="cadastroCliente.php" method="POST" target="_self">
         <fieldset>
             <legend>Informações Pessoais:</legend>
             <div class="form-row">
@@ -75,6 +77,10 @@ include "header.php";
                 <div class="form-group col-md-2">
                     <label for="inputPassword4">CPF</label>
                     <input type="text" name="cpf" class="form-control" id="inputCPF4" placeholder="111.111.111-11" onkeypress="mascara(this, '###.###.###-##')" maxlength="14">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputPassword4">CNPJ</label>
+                    <input type="text" name="cnpj" class="form-control" id="inputCNPJ4" placeholder="11.111.111/1111-11" onkeypress="mascara(this, '##.###.###/####-##')" maxlength="14">
                 </div>
             </div>
         </fieldset>
@@ -129,7 +135,6 @@ include "header.php";
                 <div class="form-group col-md-2">
                     <label for="inputZip">CEP</label>
                     <input type="text" name="cep" class="form-control" id="cep" onkeypress="mascara(this, '##.###-###')" placeholder="11.111-111" maxlength="10">
-                    
                 </div>
             </div>
         </fieldset>
@@ -145,27 +150,29 @@ include "header.php";
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
         $cpf = $_POST['cpf'];
+        $cnpj = $_POST['cnpj'];
         $endereco = $_POST['endereco'];
         $complemento = $_POST['complemento'];
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
-        $cep = $_POST['cep'];   
+        $cep = $_POST['cep'];
         $tipo = 1;
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
-        $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
+        $salvar = mysqli_query($conexao, $sql); /* Escreve os dados da tabela Usuário no banco */
 
-        if ($salvar) {
+        $sql3 = "insert into clientes (email,senha,nome,telefone,cpf,cnpj,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$cnpj','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
+        $salvar3 = mysqli_query($conexao, $sql3);/*Escreve os dandos da tabela cliente no banco */
+        if ($salvar && $salvar3) {
             ?>
-            <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+            <div class="alert alert-success">Cliente cadastrado com sucesso!</div>
         <?php
     } else {
         die(mysqli_error($conexao));
         ?>
-            <div class="alert alert-warning">Falha ao cadastrar usuário!</div>
+            <div class="alert alert-warning">Falha ao cadastrar cliente!</div>
         <?php
     }
-
-    mysqli_close($conexao);
+    mysqli_close($conexao);/* Encerra a conexão com o banco */
 }
 
 ?>

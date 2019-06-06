@@ -38,9 +38,11 @@ include "header.php";
     <fieldset>
         <legend>Tipo de Usuário:</legend>
         <?php
+            if(!isset($_SESSION['usuarioNiveisAcessoId'])){/* Verifica se a variavel usuarioNiveisAcessoId não existe */
+                $_SESSION['usuarioNiveisAcessoId'] = 1;
+            }
             if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
-
-                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
+                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
             }
             else{
                 echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='visualizarUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
@@ -143,8 +145,12 @@ include "header.php";
                     <input type="number" name="salario" class="form-control" id="salario">
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputSalario">Cargo</label>
-                    <input type="text" name="cargo" class="form-control" id="cargo">                
+                    <label for="inputCargo">Cargo</label>
+                    <select id="inputCargo" name="cargo" class="form-control">
+                        <option selected>Escolha...</option>
+                        <option>Vendedor</option>
+                        <option>Administrador</option>
+                    </select>       
                 </div>
             </div>
         </fieldset>
@@ -165,28 +171,33 @@ include "header.php";
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
         $cep = $_POST['cep'];
-        $tipo = 2;
         $codigoFunc = $_POST['codigoFunc'];
         $salario = $_POST['salario'];
         $cargo = $_POST['cargo'];
+        $tipo = 2;
 
-        $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
+        if($cargo == "Administrador"){
+            $tipo = 0;
+        }
+
+        $sql = "insert into lojaze.usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */
-        
-        $sql2 = "insert into funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
-        $salvar2 = mysqli_query($conexao, $sql2);/*Escreve os dandos no banco */
 
-        if ($salvar && $salvar2) {
+        if ($salvar) {
+                ?>
+                <div class="alert alert-success">Usuário cadastrado com sucesso!</div>
+                
+            <?php
+        } else {
+            die(mysqli_error($conexao));
             ?>
-            <div class="alert alert-success">Funcionário cadastrado com sucesso!</div>
-        <?php
-    } else {
-        die(mysqli_error($conexao));
-        ?>
-            <div class="alert alert-warning">Falha ao cadastrar funcioário!</div>
-        <?php
-    }
+                <div class="alert alert-warning">Falha ao cadastrar funcioário!</div>
+            <?php
+        }
 
+
+    $sql2 = "insert into lojaze.funcionarios (id,cpf,salario,cargo) values ('$codigoFunc','$cpf','$salario','$cargo')";
+    $salvar2 = mysqli_query($conexao, $sql2);/*Escreve os dandos no banco */
     mysqli_close($conexao);
 }
 
