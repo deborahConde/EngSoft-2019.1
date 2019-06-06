@@ -38,8 +38,10 @@ include "header.php";
     <fieldset>
         <legend>Tipo de Usuário:</legend>
         <?php
+            if(!isset($_SESSION['usuarioNiveisAcessoId'])){/* Verifica se a variavel usuarioNiveisAcessoId não existe */
+                $_SESSION['usuarioNiveisAcessoId'] = 1;
+            }
             if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
-
                 echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
             }
             else{
