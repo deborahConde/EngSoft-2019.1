@@ -9,11 +9,11 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">g
+      <li class="nav-item">
         <a class="nav-link" href="produto.php">Produtos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="cadastroUsuario.php">Cadastro de Usuário</a>
+        <a class="nav-link" href="cadastroUsuario.php">Cadastrar Usuário</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="visualizarUsuario.php">Visualizar Usuário</a>
@@ -35,6 +35,12 @@
       </li>
       <li>
         <a class="nav-link" href="exibirSetor.php">Exibir Setor</a>
+      </li>
+      <li>
+        <a class="nav-link" href="CadastroProduto.php">Cadastrar Produto</a>
+      </li>
+      <li>
+        <a class="nav-link" href="VisualizarProduto.php">Visualizar Produto</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login.php">Login</a>
