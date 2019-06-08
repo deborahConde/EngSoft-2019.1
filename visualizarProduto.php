@@ -19,8 +19,8 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function deletarUsuario(id) {
-            fetch(`./deletarUsuario.php?id=${id}`)
+        function deletarProduto(id) {
+            fetch(`./deletarProduto.php?id=${id}`)
                 .then(window.location.reload())
                 .catch(console.error);
         }
@@ -52,7 +52,7 @@ include "header.php";
                             "</td><td>" . $linha["setor"] .
                             "</td><td>" .
                            "<a href=\"./editarProduto.php?id=$linha[id]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
-                            "<a href=\"javascript:deletarUsuario('$linha[id]')\"><i class=\"fas fa-trash\"></i></a>" .
+                            "<a href=\"javascript:deletarProduto('$linha[id]')\"><i class=\"fas fa-trash\"></i></a>" .
                             "</td></tr>";
                     }
                 }
