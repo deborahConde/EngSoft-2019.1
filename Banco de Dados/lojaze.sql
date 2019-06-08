@@ -42,7 +42,15 @@ CREATE TABLE `setor` (
   `administrador` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
+CREATE TABLE `produto` (
+  `id` serial NOT NULL,
+  `nome` varchar(140) CHARACTER SET latin1 NOT NULL,
+  `preco` decimal(7,3) NOT NULL,
+  `fabricante` varchar(140) CHARACTER SET latin1 NOT NULL,
+  `desconto` decimal(4,2) NOT NULL,
+  `quantidade` int(10) NOT NULL,
+  `setor` varchar(20) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`cpf`);
@@ -69,3 +77,7 @@ ALTER TABLE `setor`
   ADD CONSTRAINT `fk_SF` FOREIGN KEY (`administrador`) REFERENCES `funcionarios` (`id`);
 COMMIT;
 
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id`),
+  ADD CONSTRAINT `fk_PS` FOREIGN KEY (`setor`) REFERENCES `setor` (`codigo`);
+COMMIT;
