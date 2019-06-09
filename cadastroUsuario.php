@@ -38,17 +38,19 @@ include "header.php";
     <fieldset>
         <legend>Tipo de Usuário:</legend>
         <?php
+            if(!isset($_SESSION['usuarioNiveisAcessoId'])){/* Verifica se a variavel usuarioNiveisAcessoId não existe */
+                $_SESSION['usuarioNiveisAcessoId'] = 1;
+            }
             if ( $_SESSION['usuarioNiveisAcessoId'] == 0) {
-
                 echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='cadastroFuncionario.php'>Funcionario</a></li></ul>";
             }
             else{
-                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='visualizarUsuario.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
+                echo "<ul class='nav'>" ."<li class='nav-item'>"."<a class='nav-link' href='cadastroCliente.php'>Cliente</a></li>"."<li class='nav-item'>"."<a class='nav-link' href='login.php'>Funcionario</a></li></ul>";
             }
         ?>
     </fieldset>
     <!-- Formulário de Cadastro de Usuário -->
-    <form action="cadastroUsuario.php" method="POST" target="_self">
+    <form action="" method="POST" target="_self">
         <fieldset>
             <legend>Informações Pessoais:</legend>
             <div class="form-row">
@@ -131,21 +133,6 @@ include "header.php";
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Administrativo:</legend>
-            <select name="test" id="test" class="form-control">
-            <option selected>Escolha...</option>
-                    <option value=1>Cliente</option>
-                    <option value=2>Vendedor</option>
-                    <option value=3>Administrador</option>
-            </select>
-            <?php
-                $test = $_GET['test'];
-                if($test == 1){
-                    echo "testtest";
-                }
-            ?>
-        </fieldset>
         <button type="submit" class="btn btn-primary" value="Submit" name="submit">Confirmar</button>
     </form>
     <!-- Fim do Formulário de Cadastro de Usuário  -->
@@ -162,7 +149,7 @@ include "header.php";
         $complemento = $_POST['complemento'];
         $cidade = $_POST['cidade'];
         $estado = $_POST['estado'];
-        $cep = $_POST['cep'];
+        $cep = $_POST['cep'];   
         $tipo = 1;
         $sql = "insert into usuarios (email,senha,nome,telefone,cpf,endereco,complemento,cidade,estado,cep,tipo) values ('$email','$senha','$nome','$telefone','$cpf','$endereco','$complemento','$cidade','$estado','$cep','$tipo')";
         $salvar = mysqli_query($conexao, $sql); /* Escreve os dados no banco */

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Visualizar Usuário</title>
+    <title>Exibir Setor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="publico/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -19,8 +19,8 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function deletarUsuario(cpf) {
-            fetch(`./deletarUsuario.php?cpf=${cpf}`)
+        function deletarUsuario(codigo) {
+            fetch(`./deletarSetor.php?codigo=${codigo}`)
                 .then(window.location.reload())
                 .catch(console.error);
         }
@@ -29,38 +29,29 @@ include "header.php";
         <table class="table table-bordered">
             <thead class="thead-light">
                 <th>Nome</th>
-                <th>Email</th>
-                <th>Cpf</th>
-                <th>Telefone</th>
-                <th>Endereço</th>
-                <th>Complemento</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>Cep</th>
-                <th>Tipo</th>
-                <th></th>
+                <th>Codigo</th>
+                <th>Administrador</th>
             </thead>
             <tbody>
                 <?php
                 include_once("conexao.php"); /* Estabelece a conexão */
-                $sql = "SELECT * FROM usuarios";
+                $sql = "SELECT * FROM setor ORDER BY Nome ASC";
                 $resultado = mysqli_query($conexao, $sql);
                 if (mysqli_num_rows($resultado) > 0) {
                     /* Dados de saída de cada linha */
                     while ($linha = mysqli_fetch_assoc($resultado)) {
+                        /* Busca as informações do funcionário para um determinado id */
+                        $sqlFuncionario = "SELECT * FROM funcionarios WHERE (id=\"" . $linha['administrador'] . "\")";
+                        $resultadoFuncionario = mysqli_query($conexao, $sqlFuncionario);
+                        $linhaFuncionario = mysqli_fetch_assoc($resultadoFuncionario);
+                        /* Busca as informações do usuário para um determinado cpf */
+                        $sqlUsuario = "SELECT * FROM usuarios WHERE (cpf=\"" . $linhaFuncionario['cpf'] . "\")";
+                        $resultadoUsuario = mysqli_query($conexao, $sqlUsuario);
+                        $linhaUsuario = mysqli_fetch_assoc($resultadoUsuario);
+                        /* Preenche a tabela com os dados */
                         echo "<tr><td>" . $linha["nome"] .
-                            "</td><td>" . $linha["email"] .
-                            "</td><td>" . $linha["cpf"] .
-                            "</td><td>" . $linha["telefone"] .
-                            "</td><td>" . $linha["endereco"] .
-                            "</td><td>" . $linha["complemento"] .
-                            "</td><td>" . $linha["cidade"] .
-                            "</td><td>" . $linha["estado"] .
-                            "</td><td>" . $linha["cep"] .
-                            "</td><td>" . $linha["tipo"] .
-                            "</td><td>" .
-                           "<a href=\"./editarUsuario.php?cpf=$linha[cpf]\"><i class=\"fas fa-pencil-alt\"></i></a>" .
-                            "<a href=\"javascript:deletarUsuario('$linha[cpf]')\"><i class=\"fas fa-trash\"></i></a>" .
+                            "</td><td>" . $linha["codigo"] .
+                            "</td><td>" . $linhaUsuario["nome"] .
                             "</td></tr>";
                     }
                 }

@@ -1,7 +1,7 @@
 <?php
-if (isset($_GET['cpf'])) {
+if (isset($_GET['codigo'])) {
   include_once("conexao.php"); /* Estabelece a conexão */
-  $sql = "DELETE FROM usuarios where cpf=\"" . $_GET['cpf'] . "\"";
+  $sql = "DELETE FROM setor WHERE (setor.codigo='$_GET[codigo]')";
   $resultado = mysqli_query($conexao, $sql);
   mysqli_close($conexao);
   if ($resultado) {
