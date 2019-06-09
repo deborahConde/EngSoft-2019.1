@@ -38,7 +38,7 @@ include "header.php";
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputQuantidade">Quantidade</label>
-                    <input type="text" name="quantidade" class="form-control" id="inputQauntidade" placeholder="Quantiadde">
+                    <input type="text" name="quantidade" class="form-control" id="inputQuantidade" placeholder="Quantidade">
                 </div>
                 <div class="form-group col-md-9">
                     <label for="inputFabricante">Fabricante</label>
