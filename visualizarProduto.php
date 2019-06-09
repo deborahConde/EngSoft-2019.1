@@ -46,8 +46,8 @@ include "header.php";
                     while ($linha = mysqli_fetch_assoc($resultado)) {
                         echo "<tr><td>" . $linha["nome"] .
                             "</td><td>" . $linha["preco"] .
-                            "</td><td>" . $linha["desconto"] .
                             "</td><td>" . $linha["quantidade"] .
+                            "</td><td>" . $linha["desconto"] .
                             "</td><td>" . $linha["fabricante"] .
                             "</td><td>" . $linha["setor"] .
                             "</td><td>" .
