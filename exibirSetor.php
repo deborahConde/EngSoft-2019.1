@@ -60,13 +60,7 @@ include "header.php";
             </tbody>
 
         </table>
-
     </div>
-
-
-
-
-
 </body>
 
 <?php
