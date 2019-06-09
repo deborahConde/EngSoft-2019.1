@@ -86,7 +86,7 @@ include "header.php";
             </div>
             <div class="form-group">
                 <label for="inputAddress2">Complemento</label>
-                <input type="text" name="complemento" class="form-control" id="inputAddress2" placeholder="Apartmento, estudio, or andar">
+                <input type="text" name="complemento" class="form-control" id="inputAddress2" placeholder="Apartamento, bloco ou andar">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
