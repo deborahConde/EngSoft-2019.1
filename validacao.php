@@ -19,9 +19,9 @@
             $_SESSION['usuarioNome'] = $resultado['nome'];
             $_SESSION['usuarioNiveisAcessoId'] = $resultado['tipo'];
             $_SESSION['usuarioEmail'] = $resultado['email'];
-            if($_SESSION['usuarioNiveisAcessoId'] == "0"){
+            if($_SESSION['usuarioNiveisAcessoId'] == 0){
                 header("Location: cadastroUsuario.php");
-            }elseif($_SESSION['usuarioNiveisAcessoId'] == "1"){
+            }elseif($_SESSION['usuarioNiveisAcessoId'] == 1){
                 header("Location: index.php");
             }else{
                 header("Location: index.php");

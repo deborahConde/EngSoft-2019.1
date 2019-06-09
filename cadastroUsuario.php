@@ -38,6 +38,9 @@ include "header.php";
     <fieldset>
         <legend>Tipo de Usuário:</legend>
         <?php
+            if ( session_status() != PHP_SESSION_ACTIVE ){
+                session_start();
+            }
             if(!isset($_SESSION['usuarioNiveisAcessoId'])){/* Verifica se a variavel usuarioNiveisAcessoId não existe */
                 $_SESSION['usuarioNiveisAcessoId'] = 1;
             }
