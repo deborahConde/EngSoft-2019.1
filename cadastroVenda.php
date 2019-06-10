@@ -28,6 +28,7 @@ include "header.php";
         }
     </script>
     <!-- Formulário de Cadastro de Venda -->
+    <!-- Script para a criação da lista de prdutos  -->
     <form action="" method="POST" target="_self">
         <script language="JavaScript">
             function inserirListaProduto() {
