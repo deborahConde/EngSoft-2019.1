@@ -25,6 +25,9 @@
         <a class="nav-link" href="visualizarFuncionario.php">Visualizar Funcionário</a>
       </li>
       <li>
+        <a class="nav-link" href="exibirFuncionario.php">Funcionários</a>
+      </li>
+      <li>
         <a class="nav-link" href="visualizarCliente.php">Visualizar Cliente</a>
       </li>
       <li>
