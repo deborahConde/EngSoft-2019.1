@@ -22,22 +22,23 @@ include "header.php";
 
 <body>
     <script language="JavaScript">
-        function inserirListaProduto(pp,qq) {
-            var p = document.getElementById("produto").value;
-            var q = document.getElementById("quantidade").value;
-            produtos = new Array();
+        window.onload = function() {
+            produto = new Array();
             quantidade = new Array();
-            produtos.push(p);
-            quantidade.push(q);
-            console.log(produtos);
-            //if (texto.substring(0, 1) != saida) {
-              //  console.log(texto.substring(0, 1));
-                //t.value += texto.substring(0, 1);
-            //}
         }
     </script>
     <!-- Formulário de Cadastro de Venda -->
+    <!-- Script para a criação da lista de prdutos  -->
     <form action="" method="POST" target="_self">
+        <script language="JavaScript">
+            function inserirListaProduto() {
+                var p = document.getElementById("produto").value;
+                var q = document.getElementById("quantidade").value;
+                produto.push(p);
+                quantidade.push(q);
+                console.log(produto, quantidade);
+            }
+        </script>
         <fieldset>
             <legend>Informações:</legend>
             <div class="form-row">
@@ -98,7 +99,7 @@ include "header.php";
                 <div class="form-group col-md-3">
                     <label for="inputQuantidade">Quantidade</label>
                     <input type="number" name="quantidade" class="form-control" id="quantidade" placeholder="EX.: 1"> 
-                    <button type="button" onclick="inserirListaProduto(produto, quantidade)">Inserir na Lista</button>
+                    <button type="button" onclick="inserirListaProduto()">Inserir na Lista</button>
                 </div>
             </div>
         </fieldset>
@@ -138,7 +139,8 @@ include "header.php";
         $resultadoProduto = mysqli_query($conexao, $sqlProduto);
         $linhaProduto = mysqli_fetch_assoc($resultadoProduto);
         /* -------*/
-        //$sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', id do produto q esta no array,quantidade do produto q ta no array",'$linhaProduto[preco]')";
+        
+        //$sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', produto,quantidade do produto q ta no array",'$linhaProduto[preco]')";
 
         $sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', '$produto','$quantidade','$linhaProduto[preco]')";
         $salvarVendaProduto = mysqli_query($conexao, $sqlVendaProduto); /* Escreve os dados no banco */
