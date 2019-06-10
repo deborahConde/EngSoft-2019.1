@@ -21,6 +21,21 @@ include "header.php";
 <hr>
 
 <body>
+    <script language="JavaScript">
+        function inserirListaProduto(pp,qq) {
+            var p = document.getElementById("produto").value;
+            var q = document.getElementById("quantidade").value;
+            produtos = new Array();
+            quantidade = new Array();
+            produtos.push(p);
+            quantidade.push(q);
+            console.log(produtos);
+            //if (texto.substring(0, 1) != saida) {
+              //  console.log(texto.substring(0, 1));
+                //t.value += texto.substring(0, 1);
+            //}
+        }
+    </script>
     <!-- Formulário de Cadastro de Venda -->
     <form action="" method="POST" target="_self">
         <fieldset>
@@ -67,8 +82,8 @@ include "header.php";
             <legend>Produtos:</legend>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="inputAddress">Produto</label>
-                    <select class="form-control" name="produto">
+                    <label for="inputProduto">Produto</label>
+                    <select class="form-control" name="produto" id="produto">
                         <option>Escolha...</option>
                         <?php 
                             include_once("conexao.php");
@@ -82,7 +97,8 @@ include "header.php";
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputQuantidade">Quantidade</label>
-                    <input type="number" name="quantidade" class="form-control" id="inputQuantidade" placeholder="EX.: 1">
+                    <input type="number" name="quantidade" class="form-control" id="quantidade" placeholder="EX.: 1"> 
+                    <button type="button" onclick="inserirListaProduto(produto, quantidade)">Inserir na Lista</button>
                 </div>
             </div>
         </fieldset>
@@ -106,10 +122,9 @@ include "header.php";
         $data = $_POST['data'];
         $produto = $_POST['produto'];
         $quantidade = $_POST['quantidade'];
-        $preco = "100";
 
         /* Insere os dados de uma venda */
-        $sqlVenda = "insert into venda (id_cliente, id_funcionario, valor_total, data) values ('$cliente','$funcionario','$valorTotal','$data')";
+        $sqlVenda = "insert into venda (id_cliente, id_funcionario, data) values ('$cliente','$funcionario','$data')";
         $salvarVenda = mysqli_query($conexao, $sqlVenda); /* Escreve os dados no banco */
 
         /* Insere os produtos relacionados a uma venda */
@@ -118,7 +133,14 @@ include "header.php";
         $resultadoIdVenda = mysqli_query($conexao, $sqlIdVenda);
         $linhaIdVenda = mysqli_fetch_assoc($resultadoIdVenda);
         /* -------*/
-        $sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', '$produto','$quantidade','$preco')";
+        /*  */
+        $sqlProduto = "SELECT * FROM produto WHERE id = '$produto'";
+        $resultadoProduto = mysqli_query($conexao, $sqlProduto);
+        $linhaProduto = mysqli_fetch_assoc($resultadoProduto);
+        /* -------*/
+        //$sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', id do produto q esta no array,quantidade do produto q ta no array",'$linhaProduto[preco]')";
+
+        $sqlVendaProduto = "insert into vendaproduto (id_venda, id_produto, quantidade, preco) values ('$linhaIdVenda[id]', '$produto','$quantidade','$linhaProduto[preco]')";
         $salvarVendaProduto = mysqli_query($conexao, $sqlVendaProduto); /* Escreve os dados no banco */
 
     if ($salvarVenda) {
@@ -142,7 +164,6 @@ include "header.php";
         <div class="alert alert-warning">Falha ao cadastrar produtovenda!</div>
     <?php
     }
-
     mysqli_close($conexao);
 }
 
